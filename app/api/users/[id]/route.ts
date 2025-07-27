@@ -25,25 +25,21 @@ export async function GET(
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  context: any
 ) {
-  const id = params.id;
-  const data = await req.json();
+  const { id } = await context.params;
+  const body = await req.json();
 
-  try {
-    const updatedUser = await prisma.user.update({
-      where: { id },
-      data: {
-        name: data.name,
-        email: data.email,
-        role: data.role.toUpperCase(),
-      },
-    });
+  const updated = await prisma.user.update({
+    where: { id },
+    data: {
+        name: body.name,
+        email: body.email,
+        role: body.role.toUpperCase(),
+    },
+  });
 
-    return NextResponse.json(updatedUser);
-  } catch (error) {
-    return NextResponse.json({ error: 'Gagal update user' }, { status: 500 });
-  }
+  return NextResponse.json(updated);
 }
 
 export async function PATCH(
