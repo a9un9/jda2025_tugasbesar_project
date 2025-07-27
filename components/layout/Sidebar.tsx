@@ -24,13 +24,11 @@ const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [openMasterData, setOpenMasterData] = useState(false);
 
+  const toggleSidebar = () => setCollapsed(!collapsed);
   const isActive = (href: string) => pathname === href;
 
-  const toggleSidebar = () => setCollapsed(!collapsed);
-
-  // Tutup dropdown Master Data saat berpindah halaman
   useEffect(() => {
-    setOpenMasterData(false);
+    setOpenMasterData(false); // tutup saat ganti route
   }, [pathname]);
 
   return (
@@ -63,12 +61,15 @@ const Sidebar = () => {
           {!collapsed && "Dashboard"}
         </Link>
 
-        {/* Admin - Master Data */}
+        {/* === ADMIN === */}
         {role === "admin" && (
           <div>
             <button
-              className="flex items-center w-full gap-2 px-3 py-2 rounded hover:bg-gray-100"
-              onClick={() => setOpenMasterData((prev) => !prev)}
+              onClick={() => setOpenMasterData(!openMasterData)}
+              className={cn(
+                "flex items-center w-full gap-2 px-3 py-2 rounded hover:bg-gray-100",
+                openMasterData && "bg-gray-100"
+              )}
             >
               <Users className="w-4 h-4" />
               {!collapsed && (
@@ -85,8 +86,13 @@ const Sidebar = () => {
               )}
             </button>
 
-            {openMasterData && !collapsed && (
-              <div className="pl-6 mt-1 space-y-1">
+            <div
+              className={cn(
+                "overflow-hidden transition-all duration-300",
+                openMasterData && !collapsed ? "max-h-96" : "max-h-0"
+              )}
+            >
+              <div className="pl-6 space-y-1">
                 <Link
                   href="/dashboard/master-data/users"
                   className={cn(
@@ -96,7 +102,7 @@ const Sidebar = () => {
                   )}
                 >
                   <UserPlus className="w-4 h-4" />
-                  Manajemen User
+                  {!collapsed && "Manajemen User"}
                 </Link>
                 <Link
                   href="/dashboard/master-data/patients"
@@ -107,7 +113,7 @@ const Sidebar = () => {
                   )}
                 >
                   <Users className="w-4 h-4" />
-                  Data Pasien
+                  {!collapsed && "Data Pasien"}
                 </Link>
                 <Link
                   href="/dashboard/master-data/doctors"
@@ -118,14 +124,14 @@ const Sidebar = () => {
                   )}
                 >
                   <Stethoscope className="w-4 h-4" />
-                  Data Dokter
+                  {!collapsed && "Data Dokter"}
                 </Link>
               </div>
-            )}
+            </div>
           </div>
         )}
 
-        {/* Dokter */}
+        {/* === DOKTER === */}
         {role === "dokter" && (
           <>
             <Link
@@ -152,7 +158,7 @@ const Sidebar = () => {
           </>
         )}
 
-        {/* Perawat */}
+        {/* === PERAWAT === */}
         {role === "perawat" && (
           <Link
             href="/dashboard/master-data/patients"

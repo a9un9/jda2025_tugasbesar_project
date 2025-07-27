@@ -41,11 +41,17 @@ export default function Register() {
       if (res.ok) {
         router.push(`/verify-otp?email=${encodeURIComponent(form.email)}`);
       } else {
-        const data = await res.json();
-        setError(data.error || "Gagal registrasi");
+        // Cek apakah respons memiliki content-type JSON
+        const contentType = res.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const data = await res.json();
+          setError(data.error || "Gagal registrasi");
+        } else {
+          setError("Terjadi kesalahan saat registrasi (non-JSON response)");
+        }
       }
     } catch (error) {
-      setError("Terjadi kesalahan");
+      setError("Terjadi kesalahan saat mengirim data");
     } finally {
       setIsLoading(false);
     }
