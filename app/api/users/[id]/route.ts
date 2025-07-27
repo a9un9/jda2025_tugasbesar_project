@@ -43,10 +43,10 @@ export async function PUT(
 }
 
 export async function PATCH(
-  request: Request,
-  { params }: { params: { id: string } }
+  req: NextRequest,
+  context: any
 ) {
-  const { id } = params;
+  const { id } = await context.params;
 
   try {
     await prisma.user.update({
