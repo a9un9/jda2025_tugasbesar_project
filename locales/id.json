@@ -1,0 +1,30 @@
+{
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "masterData": "Master Data",
+    "userManagement": "Manajemen User",
+    "patientData": "Data Pasien",
+    "doctorData": "Data Dokter"
+  },
+    "login": {
+    "title": "Masuk ke Akun",
+    "email": "Email",
+    "password": "Kata Sandi",
+    "submit": "Masuk",
+    "registerLink": "Belum punya akun? Daftar"
+  },
+  "register": {
+    "title": "Buat Akun Baru",
+    "name": "Nama",
+    "email": "Email",
+    "password": "Kata Sandi",
+    "submit": "Daftar",
+    "loginLink": "Sudah punya akun? Masuk"
+  },
+  "landing": {
+    "welcome": "Selamat datang di",
+    "description": "Ini adalah aplikasi manajemen klinik.",
+    "login": "Masuk",
+    "register": "Daftar"
+  }
+}

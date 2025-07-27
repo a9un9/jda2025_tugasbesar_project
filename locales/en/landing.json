@@ -1,0 +1,30 @@
+{
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "masterData": "Master Data",
+    "userManagement": "User Data",
+    "patientData": "Patient Data",
+    "doctorData": "Doctor Data"
+  },
+  "login": {
+    "title": "Sign In",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign In",
+    "registerLink": "Don't have an account? Register"
+  },
+  "register": {
+    "title": "Create New Account",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Register",
+    "loginLink": "Already have an account? Login"
+  },
+  "landing": {
+    "welcome": "Welcome to",
+    "description": "This is a clinic management app.",
+    "login": "Login",
+    "register": "Register"
+  }
+}
