@@ -15,20 +15,20 @@ import {
   CalendarCheck2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useTranslations } from "next-intl";
 
 const Sidebar = () => {
   const { data: session } = useSession();
   const role = session?.user?.role || "admin";
   const pathname = usePathname();
-  const t = useTranslations("Sidebar");
 
   const [collapsed, setCollapsed] = useState(false);
   const [openMasterData, setOpenMasterData] = useState(false);
 
   const isActive = (href: string) => pathname === href;
+
   const toggleSidebar = () => setCollapsed(!collapsed);
 
+  // Tutup dropdown Master Data saat berpindah halaman
   useEffect(() => {
     setOpenMasterData(false);
   }, [pathname]);
@@ -47,7 +47,7 @@ const Sidebar = () => {
         </button>
       </div>
 
-      <div className="px-4 py-2 text-sm font-medium text-center text-white bg-teal-500 rounded m-4">
+      <div className="px-4 py-2 text-sm font-medium text-center text-white bg-blue-500 rounded m-4">
         {role.toUpperCase()}
       </div>
 
@@ -60,20 +60,20 @@ const Sidebar = () => {
           )}
         >
           <LayoutDashboard className="w-4 h-4" />
-          {!collapsed && t("dashboard")}
+          {!collapsed && "Dashboard"}
         </Link>
 
-        {/* Admin */}
+        {/* Admin - Master Data */}
         {role === "admin" && (
           <div>
             <button
-              onClick={() => setOpenMasterData((prev) => !prev)}
               className="flex items-center w-full gap-2 px-3 py-2 rounded hover:bg-gray-100"
+              onClick={() => setOpenMasterData((prev) => !prev)}
             >
               <Users className="w-4 h-4" />
               {!collapsed && (
                 <>
-                  <span>{t("masterData")}</span>
+                  <span>Master Data</span>
                   <span className="ml-auto">
                     {openMasterData ? (
                       <ChevronDown className="w-4 h-4" />
@@ -91,31 +91,34 @@ const Sidebar = () => {
                   href="/dashboard/master-data/users"
                   className={cn(
                     "flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100",
-                    isActive("/dashboard/master-data/users") && "bg-gray-200 font-semibold"
+                    isActive("/dashboard/master-data/users") &&
+                      "bg-gray-200 font-semibold"
                   )}
                 >
                   <UserPlus className="w-4 h-4" />
-                  {t("users")}
+                  Manajemen User
                 </Link>
                 <Link
                   href="/dashboard/master-data/patients"
                   className={cn(
                     "flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100",
-                    isActive("/dashboard/master-data/patients") && "bg-gray-200 font-semibold"
+                    isActive("/dashboard/master-data/patients") &&
+                      "bg-gray-200 font-semibold"
                   )}
                 >
                   <Users className="w-4 h-4" />
-                  {t("patients")}
+                  Data Pasien
                 </Link>
                 <Link
                   href="/dashboard/master-data/doctors"
                   className={cn(
                     "flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100",
-                    isActive("/dashboard/master-data/doctors") && "bg-gray-200 font-semibold"
+                    isActive("/dashboard/master-data/doctors") &&
+                      "bg-gray-200 font-semibold"
                   )}
                 >
                   <Stethoscope className="w-4 h-4" />
-                  {t("doctors")}
+                  Data Dokter
                 </Link>
               </div>
             )}
@@ -129,11 +132,12 @@ const Sidebar = () => {
               href="/dashboard/master-data/patients"
               className={cn(
                 "flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100",
-                isActive("/dashboard/master-data/patients") && "bg-gray-200 font-semibold"
+                isActive("/dashboard/master-data/patients") &&
+                  "bg-gray-200 font-semibold"
               )}
             >
               <Users className="w-4 h-4" />
-              {!collapsed && t("patients")}
+              {!collapsed && "Data Pasien"}
             </Link>
             <Link
               href="/dashboard/jadwal"
@@ -143,7 +147,7 @@ const Sidebar = () => {
               )}
             >
               <CalendarCheck2 className="w-4 h-4" />
-              {!collapsed && t("schedule")}
+              {!collapsed && "Jadwal Konsultasi"}
             </Link>
           </>
         )}
@@ -154,11 +158,12 @@ const Sidebar = () => {
             href="/dashboard/master-data/patients"
             className={cn(
               "flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100",
-              isActive("/dashboard/master-data/patients") && "bg-gray-200 font-semibold"
+              isActive("/dashboard/master-data/patients") &&
+                "bg-gray-200 font-semibold"
             )}
           >
             <Users className="w-4 h-4" />
-            {!collapsed && t("patients")}
+            {!collapsed && "Data Pasien"}
           </Link>
         )}
       </nav>

@@ -1,28 +1,18 @@
-// app/[locale]/layout.tsx
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages, defaultLocale } from '@/lib/i18n';
-import { notFound } from 'next/navigation';
+"use client";
+import "./globals.css";
 
-interface Props {
-  children: React.ReactNode;
-  params: {
-    locale: string;
-  };
-}
+import { SessionProvider } from "next-auth/react";
+import { Suspense } from "react";
 
-export default async function LocaleLayout({ children, params: { locale } }: Props) {
-  // Validasi locale
-  const messages = await getMessages(locale);
-  if (!messages) {
-    notFound();
-  }
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang={locale}>
+    <html lang="en">
       <body>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
-        </NextIntlClientProvider>
+        <SessionProvider>
+          <Suspense fallback={<div>Loading...</div>}>
+            {children}
+          </Suspense>
+        </SessionProvider>
       </body>
     </html>
   );
