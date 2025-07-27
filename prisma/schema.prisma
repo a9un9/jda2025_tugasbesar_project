@@ -1,0 +1,82 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  @@map("users")
+  id          String      @id @default(cuid())
+  email       String      @unique
+  password    String
+  name        String
+  role        Role        @default(USER)
+  dokterKode  String?     // optional, karena tidak semua user dokter
+
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  createdBy   String?
+  updatedBy   String?
+
+  deletedAt   DateTime?
+  deletedBy   String?
+  deletedIs   Int         @default(2) // 1 = tidak aktif, 2 = aktif
+}
+
+model Doctor {
+  @@map("dokters")
+  id           String       @id @default(cuid())
+  dokterKode   String       @unique
+  dokterTipe   DoctorType
+  dokterName   String
+  email        String?      @unique
+  phone        String?
+
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  createdBy    String?
+  updatedBy    String?
+
+  deletedAt    DateTime?
+  deletedBy    String?
+  deletedIs    Int          @default(2)
+}
+
+model Patient {
+  @@map("patients")
+  id        String   @id @default(cuid())
+  name      String
+  email     String?  @unique
+  phone     String?
+  address   String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  createdBy String?
+  updatedBy String?
+
+  deletedAt DateTime?
+  deletedBy String?
+  deletedIs Int      @default(2)
+}
+
+enum Role {
+  ADMIN
+  DOKTER
+  PERAWAT
+}
+
+enum DoctorType {
+  DOKTER
+  PERAWAT
+}
