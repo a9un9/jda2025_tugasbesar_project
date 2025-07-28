@@ -38,6 +38,7 @@ export async function POST(req: Request) {
         dokterKode,
         verified: false,
         createdAt: wibDate,
+        createdBy: 'Anonymous',
       },
     });
 

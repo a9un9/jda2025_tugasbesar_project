@@ -1,6 +1,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { getToken } from "next-auth/jwt";
 
 export async function GET(
   req: NextRequest,
@@ -30,12 +31,20 @@ export async function PUT(
   const { id } = await context.params;
   const body = await req.json();
 
+  // Ambil token sesi login
+  const token = await getToken({ req });
+
+  if (!token) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const updated = await prisma.user.update({
     where: { id },
     data: {
         name: body.name,
         email: body.email,
         role: body.role.toUpperCase(),
+        updatedBy: token.name ?? "unknown",
     },
   });
 
@@ -48,10 +57,20 @@ export async function PATCH(
 ) {
   const { id } = await context.params;
 
+  // Ambil token sesi login
+  const token = await getToken({ req });
+
+  if (!token) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  
+    const now = new Date();
+    const wibDate = new Date(now.getTime() + 7 * 60 * 60 * 1000);
+
   try {
     await prisma.user.update({
       where: { id },
-      data: { verified: true },
+      data: { verified: true, updatedAt: wibDate, updatedBy: token.name ?? "unknown" },
     });
 
     return NextResponse.json({ success: true });
@@ -64,10 +83,17 @@ export async function PATCH(
 export async function DELETE(req: NextRequest, context: any) {
   const { id } = context.params;
 
+  // Ambil token sesi login
+  const token = await getToken({ req });
+
+  if (!token) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   try {
     await prisma.user.update({
       where: { id },
-      data: { deletedIs: 1 },
+      data: { deletedIs: 1, deletedBy: token.name ?? "unknown" },
     });
 
     return NextResponse.json({ success: true });

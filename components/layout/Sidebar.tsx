@@ -18,7 +18,8 @@ import { cn } from "@/lib/utils";
 
 const Sidebar = () => {
   const { data: session } = useSession();
-  const role = session?.user?.role || "admin";
+  // const role = session?.user?.role || "admin";
+  const role = session?.user?.role?.toLowerCase() || "admin";
   const pathname = usePathname();
 
   const [collapsed, setCollapsed] = useState(false);
@@ -28,7 +29,8 @@ const Sidebar = () => {
   const isActive = (href: string) => pathname === href;
 
   useEffect(() => {
-    setOpenMasterData(false); // tutup saat ganti route
+    const isMasterPath = pathname.startsWith("/dashboard/master-data");
+    setOpenMasterData(isMasterPath);
   }, [pathname]);
 
   return (
@@ -39,13 +41,13 @@ const Sidebar = () => {
       )}
     >
       <div className="flex items-center justify-between p-4 border-b">
-        {!collapsed && <h2 className="text-lg font-bold">Klinik Sehat</h2>}
+        {!collapsed && <h2 className="text-lg font-bold">Klinik Tokcer</h2>}
         <button onClick={toggleSidebar}>
           <Menu className="w-5 h-5" />
         </button>
       </div>
 
-      <div className="px-4 py-2 text-sm font-medium text-center text-white bg-blue-500 rounded m-4">
+      <div className="px-4 py-2 text-sm font-medium text-center text-white bg-teal-500 rounded m-4">
         {role.toUpperCase()}
       </div>
 
@@ -105,10 +107,10 @@ const Sidebar = () => {
                   {!collapsed && "Manajemen User"}
                 </Link>
                 <Link
-                  href="/dashboard/master-data/patients"
+                  href="/dashboard/master-data/pasiens"
                   className={cn(
                     "flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100",
-                    isActive("/dashboard/master-data/patients") &&
+                    isActive("/dashboard/master-data/pasiens") &&
                       "bg-gray-200 font-semibold"
                   )}
                 >
@@ -116,10 +118,10 @@ const Sidebar = () => {
                   {!collapsed && "Data Pasien"}
                 </Link>
                 <Link
-                  href="/dashboard/master-data/doctors"
+                  href="/dashboard/master-data/dokters"
                   className={cn(
                     "flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100",
-                    isActive("/dashboard/master-data/doctors") &&
+                    isActive("/dashboard/master-data/dokters") &&
                       "bg-gray-200 font-semibold"
                   )}
                 >
@@ -128,23 +130,7 @@ const Sidebar = () => {
                 </Link>
               </div>
             </div>
-          </div>
-        )}
-
-        {/* === DOKTER === */}
-        {role === "dokter" && (
-          <>
-            <Link
-              href="/dashboard/master-data/patients"
-              className={cn(
-                "flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100",
-                isActive("/dashboard/master-data/patients") &&
-                  "bg-gray-200 font-semibold"
-              )}
-            >
-              <Users className="w-4 h-4" />
-              {!collapsed && "Data Pasien"}
-            </Link>
+            
             <Link
               href="/dashboard/jadwal"
               className={cn(
@@ -155,16 +141,33 @@ const Sidebar = () => {
               <CalendarCheck2 className="w-4 h-4" />
               {!collapsed && "Jadwal Konsultasi"}
             </Link>
+          </div>
+        )}
+
+        {/* === DOKTER === */}
+        {role === "dokter" && (
+          <>
+            <Link
+              href="/dashboard/master-data/pasiens"
+              className={cn(
+                "flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100",
+                isActive("/dashboard/master-data/pasiens") &&
+                  "bg-gray-200 font-semibold"
+              )}
+            >
+              <Users className="w-4 h-4" />
+              {!collapsed && "Data Pasien"}
+            </Link>
           </>
         )}
 
         {/* === PERAWAT === */}
         {role === "perawat" && (
           <Link
-            href="/dashboard/master-data/patients"
+            href="/dashboard/master-data/pasiens"
             className={cn(
               "flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100",
-              isActive("/dashboard/master-data/patients") &&
+              isActive("/dashboard/master-data/pasiens") &&
                 "bg-gray-200 font-semibold"
             )}
           >

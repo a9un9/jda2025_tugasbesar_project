@@ -1,0 +1,89 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String  @id @default(cuid())
+  email      String  @unique
+  password   String
+  name       String
+  role       Role    @default(ADMIN)
+  dokterKode String? // optional, karena tidak semua user dokter
+
+  otp       String?
+  otpExpiry DateTime?
+  verified  Boolean   @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  createdBy String?
+  updatedBy String?
+
+  deletedAt DateTime?
+  deletedBy String?
+  deletedIs Int       @default(2) // 1 = tidak aktif, 2 = aktif
+
+  @@map("users")
+}
+
+model Dokter {
+  id         String     @id @default(cuid())
+  dokterKode String     @unique
+  dokterTipe DokterType
+  dokterName String
+  email      String?    @unique
+  phone      String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  createdBy String?
+  updatedBy String?
+
+  deletedAt DateTime?
+  deletedBy String?
+  deletedIs Int       @default(2)
+
+  @@map("dokters")
+}
+
+model Pasien {
+  id      String  @id @default(cuid())
+  name    String
+  email   String? @unique
+  phone   String?
+  address String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  createdBy String?
+  updatedBy String?
+
+  deletedAt DateTime?
+  deletedBy String?
+  deletedIs Int       @default(2)
+
+  @@map("pasiens")
+}
+
+enum Role {
+  ADMIN
+  DOKTER
+  PERAWAT
+}
+
+enum DokterType {
+  DOKTER
+  PERAWAT
+}

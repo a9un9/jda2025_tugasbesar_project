@@ -102,7 +102,7 @@ export default function UserTable() {
           onClick={() => router.push('/dashboard/master-data/users/add')}
           className="ml-4 flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
         >
-          <Plus size={18} /> Tambah Pengguna
+          <Plus size={18} /> Tambah User
         </button>
       </div>
 
@@ -129,7 +129,13 @@ export default function UserTable() {
                       </td>
                     ))}
                   </tr>
-                ))
+                )) : filteredUsers.length === 0 ? (
+                <tr>
+                  <td colSpan={6} className="text-center p-4 text-gray-500">
+                    Data tidak ditemukan.
+                  </td>
+                </tr>
+              )
               : filteredUsers.map((u, i) => (
                   <tr key={u.id} className="text-center">
                     <td className="p-2 border">
