@@ -66,6 +66,17 @@ const Sidebar = () => {
         {/* === ADMIN === */}
         {role === "admin" && (
           <div>
+              <Link
+                href="/dashboard/jadwal"
+                className={cn(
+                  "flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100",
+                  isActive("/dashboard/jadwal") && "bg-gray-200 font-semibold"
+                )}
+              >
+                <CalendarCheck2 className="w-4 h-4" />
+                {!collapsed && "Jadwal Konsultasi"}
+              </Link>
+
             <button
               onClick={() => setOpenMasterData(!openMasterData)}
               className={cn(
@@ -73,6 +84,7 @@ const Sidebar = () => {
                 openMasterData && "bg-gray-100"
               )}
             >
+
               <Users className="w-4 h-4" />
               {!collapsed && (
                 <>
@@ -130,17 +142,6 @@ const Sidebar = () => {
                 </Link>
               </div>
             </div>
-            
-            <Link
-              href="/dashboard/jadwal"
-              className={cn(
-                "flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100",
-                isActive("/dashboard/jadwal") && "bg-gray-200 font-semibold"
-              )}
-            >
-              <CalendarCheck2 className="w-4 h-4" />
-              {!collapsed && "Jadwal Konsultasi"}
-            </Link>
           </div>
         )}
 
@@ -148,7 +149,7 @@ const Sidebar = () => {
         {role === "dokter" && (
           <>
             <Link
-              href="/dashboard/master-data/pasiens"
+              href="/dashboard"
               className={cn(
                 "flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100",
                 isActive("/dashboard/master-data/pasiens") &&
@@ -164,7 +165,7 @@ const Sidebar = () => {
         {/* === PERAWAT === */}
         {role === "perawat" && (
           <Link
-            href="/dashboard/master-data/pasiens"
+            href="/dashboard"
             className={cn(
               "flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100",
               isActive("/dashboard/master-data/pasiens") &&

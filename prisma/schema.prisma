@@ -77,6 +77,44 @@ model Pasien {
   @@map("pasiens")
 }
 
+model Obat {
+  id         String   @id @default(cuid())
+  kode       String   @unique
+  nama       String
+  satuan     String?
+  harga      Decimal  @default(0.0)
+  keterangan String?
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  createdBy  String?
+  updatedBy  String?
+
+  deletedAt  DateTime?
+  deletedBy  String?
+  deletedIs  Int      @default(2)
+
+  @@map("obats")
+}
+
+model Poliklinik {
+  id         String   @id @default(cuid())
+  kode       String   @unique
+  nama       String
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  createdBy  String?
+  updatedBy  String?
+
+  deletedAt  DateTime?
+  deletedBy  String?
+  deletedIs  Int      @default(2)
+
+  @@map("polikliniks")
+}
+
+
 enum Role {
   ADMIN
   DOKTER
