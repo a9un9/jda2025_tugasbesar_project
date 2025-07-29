@@ -1,40 +1,32 @@
-// app/api/dokters/route.ts
+// app/api/pasiens/route.ts
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { dokterKode, dokterName, dokterTipe, email, phone, updatedBy } = await req.json();
+    const { nik, name, address, email, phone, updatedBy } = await req.json();
 
-    if (!dokterKode || !dokterName || !email) {
+    if (!nik || !name || !email) {
       return NextResponse.json({ error: "Data tidak lengkap" }, { status: 400 });
     }
 
-    const existingDoktor = await prisma.dokter.findFirst({
+    const existingPasien = await prisma.pasien.findFirst({
       where: { email, deletedIs: 2 },
     });
 
-    if (existingDoktor) {
+    if (existingPasien) {
       return NextResponse.json({ error: "Email sudah digunakan" }, { status: 400 });
     }
 
     const now = new Date();
     const wibDate = new Date(now.getTime() + 7 * 60 * 60 * 1000);
 
-    const mapToEnum = (input: string) => {
-      if (input.toLowerCase() === "dokter") return "DOKTER";
-      if (input.toLowerCase() === "perawat") return "PERAWAT";
-      throw new Error("Invalid dokterTipe");
-    };
-
-    const dokterTipeEnum = mapToEnum(dokterTipe); // dari body request
-
-    await prisma.dokter.create({
+    await prisma.pasien.create({
       data: {
-        dokterKode,
-        dokterName,
-        dokterTipe: dokterTipeEnum,
+        nik,
+        name,
         email,
+        address,
         phone,
         createdAt: wibDate,
         createdBy: updatedBy || "Anonymous",
@@ -43,24 +35,24 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ message: "Dokter created" });
   } catch (error) {
-    console.error("API /api/dokters error:", error);
+    console.error("API /api/pasiens error:", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
 
 export async function GET() {
-  const dokters = await prisma.dokter.findMany({
+  const pasiens = await prisma.pasien.findMany({
     where: { deletedIs: 2 }, // pastikan ini sesuai dengan model
     select: {
       id: true,
-      dokterKode: true,
-      dokterName: true,
-      dokterTipe: true,
+      nik: true,
+      name: true,
+      address: true,
       email: true,
       phone: true,
     },
   });
 
-  return NextResponse.json(dokters);
+  return NextResponse.json(pasiens);
 }
 

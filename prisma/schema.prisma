@@ -59,6 +59,7 @@ model Dokter {
 
 model Pasien {
   id      String  @id @default(cuid())
+  nik     String  @unique
   name    String
   email   String? @unique
   phone   String?
