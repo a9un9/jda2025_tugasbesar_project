@@ -125,7 +125,7 @@ export default function DokterTable() {
             {loading
               ? Array.from({ length: doktersPerPage }).map((_, i) => (
                   <tr key={i}>
-                    {[...Array(6)].map((_, j) => (
+                    {[...Array(7)].map((_, j) => (
                       <td key={j} className="p-2 border">
                         <div className="h-4 bg-gray-200 rounded animate-pulse w-full"></div>
                       </td>

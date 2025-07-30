@@ -13,6 +13,7 @@ import {
   ChevronDown,
   ChevronRight,
   CalendarCheck2,
+  Hospital,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -41,7 +42,7 @@ const Sidebar = () => {
       )}
     >
       <div className="flex items-center justify-between p-4 border-b">
-        {!collapsed && <h2 className="text-lg font-bold">Klinik Tokcer</h2>}
+        {!collapsed && <h2 className="text-lg font-bold">Klinik Sehat Tentrem</h2>}
         <button onClick={toggleSidebar}>
           <Menu className="w-5 h-5" />
         </button>
@@ -139,6 +140,17 @@ const Sidebar = () => {
                 >
                   <Stethoscope className="w-4 h-4" />
                   {!collapsed && "Data Dokter"}
+                </Link>
+                <Link
+                  href="/dashboard/master-data/polikliniks"
+                  className={cn(
+                    "flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100",
+                    isActive("/dashboard/master-data/polikliniks") &&
+                      "bg-gray-200 font-semibold"
+                  )}
+                >
+                  <Hospital className="w-4 h-4" />
+                  {!collapsed && "Data Poliklinik"}
                 </Link>
               </div>
             </div>
