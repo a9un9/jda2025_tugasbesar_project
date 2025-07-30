@@ -6,7 +6,7 @@ import PoliklinikForm from '@/components/polikliniks/PoliklinikForm'
 import type { Poliklinik } from '@prisma/client'
 import { Loader2 } from 'lucide-react'
 
-export default function EditUserPage() {
+export default function EditPoliklinikPage() {
   const router = useRouter()
   const params = useParams()
   const id = params.id as string
@@ -15,7 +15,7 @@ export default function EditUserPage() {
 
   useEffect(() => {
     if (!id) return
-    const fetchUser = async () => {
+    const fetchPoliklinik = async () => {
       try {
         const res = await fetch(`/api/polikliniks/${id}`)
         const data = await res.json()
@@ -26,7 +26,7 @@ export default function EditUserPage() {
         setLoading(false)
       }
     }
-    fetchUser()
+    fetchPoliklinik()
   }, [id])
 
   if (loading) {

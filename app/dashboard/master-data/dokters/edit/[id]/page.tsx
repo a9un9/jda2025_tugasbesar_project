@@ -6,7 +6,7 @@ import DokterForm from '@/components/dokters/DokterForm'
 import type { Dokter } from '@prisma/client'
 import { Loader2 } from 'lucide-react'
 
-export default function EditUserPage() {
+export default function EditDokterPage() {
   const router = useRouter()
   const params = useParams()
   const id = params.id as string
@@ -15,7 +15,7 @@ export default function EditUserPage() {
 
   useEffect(() => {
     if (!id) return
-    const fetchUser = async () => {
+    const fetchDokter = async () => {
       try {
         const res = await fetch(`/api/dokters/${id}`)
         const data = await res.json()
@@ -26,7 +26,7 @@ export default function EditUserPage() {
         setLoading(false)
       }
     }
-    fetchUser()
+    fetchDokter()
   }, [id])
 
   if (loading) {

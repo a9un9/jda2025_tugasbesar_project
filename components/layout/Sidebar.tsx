@@ -14,6 +14,11 @@ import {
   ChevronRight,
   CalendarCheck2,
   Hospital,
+  HeartPulse,
+  Pill,
+  ClipboardList,
+  BadgePlus,
+  FolderCog
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -68,6 +73,28 @@ const Sidebar = () => {
         {role === "admin" && (
           <div>
               <Link
+                href="/dashboard/registrasi_rajal"
+                className={cn(
+                  "flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100",
+                  isActive("/dashboard/registrasi_rajal") && "bg-gray-200 font-semibold"
+                )}
+              >
+                <ClipboardList className="w-4 h-4" />
+                {!collapsed && "Registrasi Rawat Jalan"}
+              </Link>
+              <Link
+                href="/dashboard/pelayanan"
+                className={cn(
+                  "flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100",
+                  isActive("/dashboard/pelayanan") &&
+                    "bg-gray-200 font-semibold"
+                )}
+              >
+                <BadgePlus className="w-4 h-4" />
+                {!collapsed && "Pelayanan"}
+              </Link>
+
+              <Link
                 href="/dashboard/jadwal"
                 className={cn(
                   "flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100",
@@ -86,7 +113,7 @@ const Sidebar = () => {
               )}
             >
 
-              <Users className="w-4 h-4" />
+              <FolderCog className="w-4 h-4" />
               {!collapsed && (
                 <>
                   <span>Master Data</span>
@@ -152,6 +179,17 @@ const Sidebar = () => {
                   <Hospital className="w-4 h-4" />
                   {!collapsed && "Data Poliklinik"}
                 </Link>
+                <Link
+                  href="/dashboard/master-data/obats"
+                  className={cn(
+                    "flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100",
+                    isActive("/dashboard/master-data/obats") &&
+                      "bg-gray-200 font-semibold"
+                  )}
+                >
+                  <Pill className="w-4 h-4" />
+                  {!collapsed && "Data Obat"}
+                </Link>
               </div>
             </div>
           </div>
@@ -159,34 +197,47 @@ const Sidebar = () => {
 
         {/* === DOKTER === */}
         {role === "dokter" && (
-          <>
+          <div>
             <Link
-              href="/dashboard"
+              href="/dashboard/pelayanan"
               className={cn(
                 "flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100",
-                isActive("/dashboard/master-data/pasiens") &&
+                isActive("/dashboard/pelayanan") &&
                   "bg-gray-200 font-semibold"
               )}
             >
               <Users className="w-4 h-4" />
-              {!collapsed && "Data Pasien"}
+              {!collapsed && "Pelayanan"}
             </Link>
-          </>
+          </div>
         )}
 
         {/* === PERAWAT === */}
         {role === "perawat" && (
-          <Link
-            href="/dashboard"
-            className={cn(
-              "flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100",
-              isActive("/dashboard/master-data/pasiens") &&
-                "bg-gray-200 font-semibold"
-            )}
-          >
-            <Users className="w-4 h-4" />
-            {!collapsed && "Data Pasien"}
-          </Link>
+          <div>
+            <Link
+              href="/dashboard/registrasi_rajal"
+              className={cn(
+                "flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100",
+                isActive("/dashboard/registrasi_rajal") && "bg-gray-200 font-semibold"
+              )}
+            >
+              <ClipboardList className="w-4 h-4" />
+              {!collapsed && "Registrasi Rawat Jalan"}
+            </Link>
+            
+            <Link
+              href="/dashboard/pelayanan"
+              className={cn(
+                "flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100",
+                isActive("/dashboard/pelayanan") &&
+                  "bg-gray-200 font-semibold"
+              )}
+            >
+              <BadgePlus className="w-4 h-4" />
+              {!collapsed && "Pelayanan"}
+            </Link>
+          </div>
         )}
       </nav>
     </aside>

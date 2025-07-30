@@ -18,6 +18,9 @@ export default function Navbar() {
           <Link href="/" className="text-gray-700 hover:text-teal-600">
             Beranda
           </Link>
+          <Link href="/jadwal_dokter" className="text-gray-700 hover:text-teal-600">
+            Jadwal Dokter
+          </Link>
           {/* <Link href="/login" className="text-gray-700 hover:text-teal-600">
             Masuk
           </Link>
