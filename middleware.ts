@@ -5,6 +5,8 @@ export async function middleware(req: NextRequest) {
   const token = await getToken({ req });
   const { pathname } = req.nextUrl;
 
+  req.headers.set("cache-control", "no-store");
+
   const isAuth = !!token;
   const userRole = token?.role;
 
