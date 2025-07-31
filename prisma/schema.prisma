@@ -50,9 +50,10 @@ model Dokter {
   createdBy String?
   updatedBy String?
 
-  deletedAt DateTime?
-  deletedBy String?
-  deletedIs Int       @default(2)
+  deletedAt    DateTime?
+  deletedBy    String?
+  deletedIs    Int            @default(2)
+  RegistrasiRj RegistrasiRj[]
 
   @@map("dokters")
 }
@@ -64,6 +65,28 @@ model Pasien {
   email   String? @unique
   phone   String?
   address String?
+  gender  Gender?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  createdBy String?
+  updatedBy String?
+
+  deletedAt    DateTime?
+  deletedBy    String?
+  deletedIs    Int            @default(2)
+  RegistrasiRj RegistrasiRj[]
+
+  @@map("pasiens")
+}
+
+model Obat {
+  id         String  @id @default(cuid())
+  kode       String  @unique
+  nama       String
+  satuan     String?
+  harga      Decimal @default(0.0)
+  keterangan String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -74,46 +97,48 @@ model Pasien {
   deletedBy String?
   deletedIs Int       @default(2)
 
-  @@map("pasiens")
-}
-
-model Obat {
-  id         String   @id @default(cuid())
-  kode       String   @unique
-  nama       String
-  satuan     String?
-  harga      Decimal  @default(0.0)
-  keterangan String?
-
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  createdBy  String?
-  updatedBy  String?
-
-  deletedAt  DateTime?
-  deletedBy  String?
-  deletedIs  Int      @default(2)
-
   @@map("obats")
 }
 
 model Poliklinik {
-  id         String   @id @default(cuid())
-  kode       String   @unique
-  nama       String
+  id   String @id @default(cuid())
+  kode String @unique
+  nama String
 
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  createdBy  String?
-  updatedBy  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  createdBy String?
+  updatedBy String?
 
-  deletedAt  DateTime?
-  deletedBy  String?
-  deletedIs  Int      @default(2)
+  deletedAt DateTime?
+  deletedBy String?
+  deletedIs Int       @default(2)
 
   @@map("polikliniks")
 }
 
+model RegistrasiRj {
+  id         String   @id @default(uuid())
+  pasienId   String
+  dokterKode String
+  tanggal    DateTime
+  keluhan    String
+  status_periksa Int       @default(1)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  createdBy String?
+  updatedBy String?
+
+  deletedAt DateTime?
+  deletedBy String?
+  deletedIs Int       @default(2)
+
+  pasien Pasien @relation(fields: [pasienId], references: [id])
+  dokter Dokter @relation(fields: [dokterKode], references: [dokterKode])
+
+  @@map("registrasi_rjs")
+}
 
 enum Role {
   ADMIN
@@ -124,4 +149,9 @@ enum Role {
 enum DokterType {
   DOKTER
   PERAWAT
+}
+
+enum Gender {
+  L
+  P
 }

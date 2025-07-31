@@ -17,6 +17,7 @@ type PasienFormData = {
   email: string
   address: string
   phone: string
+  gender: string
 }
 
 export default function UserForm({ pasien, onSuccess }: Props) {
@@ -25,7 +26,8 @@ export default function UserForm({ pasien, onSuccess }: Props) {
     name: '',
     email: '',
     address: '',
-    phone: ''
+    phone: '',
+    gender: ''
   })
 
   const [loading, setLoading] = useState(false)
@@ -40,6 +42,7 @@ export default function UserForm({ pasien, onSuccess }: Props) {
         name: pasien.name ?? '',
         email: pasien.email ?? '',
         phone: pasien.phone ?? '',
+        gender: pasien.gender ?? '',
       })
     }
   }, [pasien])
@@ -99,6 +102,19 @@ export default function UserForm({ pasien, onSuccess }: Props) {
           className="w-[300px] p-2 border rounded"
           required
         />
+      </div>
+
+      <div>
+        <label className="block font-semibold">Jenis kelamin</label>
+        <select
+          value={form.gender}
+          onChange={(e) => setForm({ ...form, gender: e.target.value })}
+          className="w-[300px] p-2 border rounded"
+        >
+          <option value="">Pilih</option>
+          <option value="L">Laki-laki</option>
+          <option value="P">Perempuan</option>
+        </select>
       </div>
 
       <div>

@@ -9,6 +9,7 @@ interface Pasien {
   id: string;
   nik: string;
   name: string;
+  gender: string;
   email: string;
   address: string;
   phone: string;
@@ -115,6 +116,7 @@ export default function PasienTable() {
               <th className="p-2 border">No</th>
               <th className="p-2 border">NIK</th>
               <th className="p-2 border">Nama</th>
+              <th className="p-2 border">Jenis kelamin</th>
               <th className="p-2 border">Email</th>
               <th className="p-2 border">Address</th>
               <th className="p-2 border">Phone</th>
@@ -125,7 +127,7 @@ export default function PasienTable() {
             {loading
               ? Array.from({ length: pasiensPerPage }).map((_, i) => (
                   <tr key={i}>
-                    {[...Array(7)].map((_, j) => (
+                    {[...Array(8)].map((_, j) => (
                       <td key={j} className="p-2 border">
                         <div className="h-4 bg-gray-200 rounded animate-pulse w-full"></div>
                       </td>
@@ -145,6 +147,7 @@ export default function PasienTable() {
                     </td>
                     <td className="p-2 border">{u.nik}</td>
                     <td className="p-2 border">{u.name}</td>
+                    <td className="p-2 border">{u.gender}</td>
                     <td className="p-2 border">{u.email}</td>
                     <td className="p-2 border">{u.address}</td>
                     <td className="p-2 border">{u.phone}</td>

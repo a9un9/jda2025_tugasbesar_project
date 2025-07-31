@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { nik, name, address, email, phone, updatedBy } = await req.json();
+    const { nik, name, address, email, phone, gender, updatedBy } = await req.json();
 
     if (!nik || !name || !email) {
       return NextResponse.json({ error: "Data tidak lengkap" }, { status: 400 });
@@ -25,6 +25,7 @@ export async function POST(req: Request) {
       data: {
         nik,
         name,
+        gender,
         email,
         address,
         phone,
@@ -47,6 +48,7 @@ export async function GET() {
       id: true,
       nik: true,
       name: true,
+      gender: true,
       address: true,
       email: true,
       phone: true,
