@@ -6,7 +6,6 @@ export async function POST(req: Request) {
 
   try {
     let pasienId = data.pasienId
-    let nik = data.nik
 
     // Jika pasien baru
     if (!pasienId) {
@@ -24,9 +23,7 @@ export async function POST(req: Request) {
     }
 
     const existing = await prisma.registrasiRj.findFirst({
-      where: {
-        pasienId
-      },
+      where: { pasienId },
     })
 
     if (existing) {
@@ -43,18 +40,18 @@ export async function POST(req: Request) {
         dokterKode: data.dokterKode,
         keluhan: data.keluhan,
         tanggal: new Date(data.tanggal),
+        poliKode: data.poliKode,
       },
       include: {
         pasien: true,
         dokter: true,
+        poliklinik: true,
       },
     })
 
-    // Ambil data poli dari ID
+    // Ambil data poli berdasarkan kode
     const poli = await prisma.poliklinik.findUnique({
-      where: {
-        id: data.poliId,
-      },
+      where: { kode: data.poliKode },
     })
 
     return NextResponse.json({

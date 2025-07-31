@@ -114,6 +114,9 @@ model Poliklinik {
   deletedBy String?
   deletedIs Int       @default(2)
 
+  // tambahkan ini:
+  registrasiRj RegistrasiRj[]
+
   @@map("polikliniks")
 }
 
@@ -121,6 +124,7 @@ model RegistrasiRj {
   id         String   @id @default(uuid())
   pasienId   String
   dokterKode String
+  poliKode   String
   tanggal    DateTime
   keluhan    String
   status_periksa Int       @default(1)
@@ -136,6 +140,7 @@ model RegistrasiRj {
 
   pasien Pasien @relation(fields: [pasienId], references: [id])
   dokter Dokter @relation(fields: [dokterKode], references: [dokterKode])
+  poliklinik Poliklinik @relation(fields: [poliKode], references: [kode])
 
   @@map("registrasi_rjs")
 }

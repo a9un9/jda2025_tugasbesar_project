@@ -17,7 +17,7 @@ export default function RegistrasiForm() {
     address: '',
     keluhan: '',
     pasienId: '',
-    poliId: '',
+    poliKode: '',
     dokterKode: '',
     gender: '', // tambahkan ini agar tidak undefined
     tanggal: dayjs().format('YYYY-MM-DD'),
@@ -73,7 +73,7 @@ export default function RegistrasiForm() {
       phone: '',
       pasienId: '',
       keluhan: '',
-      poliId: '',
+      poliKode: '',
       dokterKode: '',
       gender: '',
       nik: '',
@@ -205,14 +205,14 @@ export default function RegistrasiForm() {
         </div>
 
         <select
-          value={form.poliId}
-          onChange={(e) => setForm({ ...form, poliId: e.target.value })}
+          value={form.poliKode}
+          onChange={(e) => setForm({ ...form, poliKode: e.target.value })}
           className="w-full p-2 border rounded"
           required
         >
           <option value="">Pilih Poli</option>
           {poli.map((p: any) => (
-            <option key={p.id} value={p.id}>
+            <option key={p.kode} value={p.kode}>
               {p.nama}
             </option>
           ))}
