@@ -38,7 +38,7 @@ export default function Navbar() {
             <DropdownMenuItem onClick={() => router.push(`/dashboard/master-data/users/edit/${session?.user?.id}`)}>
               Profile
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => signOut()}>
+            <DropdownMenuItem onClick={() => signOut({ callbackUrl: "/login" })}>
               Logout
             </DropdownMenuItem>
           </DropdownMenuContent>
