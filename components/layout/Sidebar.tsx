@@ -47,7 +47,7 @@ const Sidebar = () => {
       )}
     >
       <div className="flex items-center justify-between p-4 border-b">
-        {!collapsed && <h2 className="text-lg font-bold">Klinik Sehat Tentrem</h2>}
+        {!collapsed && <h2 className="text-lg font-bold">Klinik Full Senyum</h2>}
         <button onClick={toggleSidebar}>
           <Menu className="w-5 h-5" />
         </button>

@@ -108,6 +108,7 @@ export default function UserForm({ dokter, onSuccess }: Props) {
           onChange={(e) => setForm({ ...form, dokterTipe: e.target.value })}
           className="w-[300px] p-2 border rounded"
         >
+          <option value="">Pilih</option>
           <option value="dokter">Dokter</option>
           <option value="perawat">Perawat</option>
         </select>

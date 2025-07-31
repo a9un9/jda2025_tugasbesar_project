@@ -25,7 +25,7 @@ export const authOptions: NextAuthOptions = {
             password: true,
             verified: true,
             otpExpiry: true,
-            role: true, // ⬅️ Tambahkan ini
+            role: true,
           },
         });
 
@@ -67,7 +67,7 @@ export const authOptions: NextAuthOptions = {
 
   callbacks: {
     async jwt({ token, user }) {
-      // Tambahkan role & id saat login
+
       if (user) {
         token.id = user.id;
         token.role = (user as any).role;

@@ -12,7 +12,7 @@ export default function Navbar() {
     <header className="bg-white shadow fixed top-0 left-0 right-0 z-50">
       <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
         <Link href="/" className="text-2xl font-bold text-teal-600">
-          Klinik Sehat Tentrem
+          Klinik Full Senyum
         </Link>
         <nav className="hidden md:flex gap-6 items-center">
           <Link href="/" className="text-gray-700 hover:text-teal-600">

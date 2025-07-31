@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import DashboardCarousel from '@/components/layout/DashboardCarousel';
 import HealthQuote from '@/components/layout/HealthQuote';
 
+
 export default function DashboardPage() {
   const [summary, setSummary] = useState({
     pasien: 0,

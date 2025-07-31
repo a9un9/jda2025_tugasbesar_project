@@ -50,7 +50,7 @@ export async function POST(req: Request) {
 
 export async function GET() {
   const dokters = await prisma.dokter.findMany({
-    where: { deletedIs: 2 }, // pastikan ini sesuai dengan model
+    where: { deletedIs: 2, dokterTipe:'DOKTER' },
     select: {
       id: true,
       dokterKode: true,
