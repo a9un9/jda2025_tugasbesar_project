@@ -8,14 +8,14 @@ export default function LandingPage() {
       <Navbar />
       <main className="min-h-screen flex items-center justify-center bg-gray-50 pt-28 px-4">
         <div className="max-w-4xl mx-auto text-center space-y-6">
-          <h1 className="text-5xl md:text-6xl font-extrabold text-gray-800 leading-tight">
+          <h1 className="text-5xl sm:text-4xl font-extrabold text-gray-800 leading-tight">
             Selamat Datang di <span className="text-teal-600">Klinik Full Senyum</span>
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Aplikasi manajemen klinik digital yang memudahkan Anda dalam mengelola data pasien, jadwal dokter, obat, dan laporan keuangan secara efisien dan aman.
           </p>
 
-          <div className="flex justify-center gap-4 flex-wrap">
+          {/* <div className="flex justify-center gap-4 flex-wrap">
             <Link
               href="/login"
               className="px-6 py-3 bg-teal-600 text-white rounded-xl shadow hover:bg-teal-700 transition"
@@ -28,7 +28,7 @@ export default function LandingPage() {
             >
               Daftar
             </Link>
-          </div>
+          </div> */}
 
           <img
             src="/images/undraw_medicine_hqqg.svg"

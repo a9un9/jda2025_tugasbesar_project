@@ -18,7 +18,9 @@ import {
   Pill,
   ClipboardList,
   BadgePlus,
-  FolderCog
+  FolderCog,
+  MessageCircle,
+  Mail
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -95,14 +97,25 @@ const Sidebar = () => {
               </Link>
 
               <Link
-                href="/dashboard/jadwal"
+                href="/dashboard/jadwal_dokter"
                 className={cn(
                   "flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100",
-                  isActive("/dashboard/jadwal") && "bg-gray-200 font-semibold"
+                  isActive("/dashboard/jadwal_dokter") && "bg-gray-200 font-semibold"
                 )}
               >
                 <CalendarCheck2 className="w-4 h-4" />
                 {!collapsed && "Jadwal Konsultasi"}
+              </Link>
+
+              <Link
+                href="/dashboard/kontak"
+                className={cn(
+                  "flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100",
+                  isActive("/dashboard/kontak") && "bg-gray-200 font-semibold"
+                )}
+              >
+                <Mail className="w-4 h-4" />
+                {!collapsed && "Pesan"}
               </Link>
 
             <button

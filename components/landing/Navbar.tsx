@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Home, CalendarDays, Phone, Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,16 +15,24 @@ export default function Navbar() {
           Klinik Full Senyum
         </Link>
         <nav className="hidden md:flex gap-6 items-center">
-          <Link href="/" className="text-gray-700 hover:text-teal-600">
+          <Link href="/" className="flex items-center gap-2 text-gray-700 hover:text-teal-600">
+            <Home className="w-4 h-4" />
             Beranda
           </Link>
-          <Link href="/jadwal_dokter" className="text-gray-700 hover:text-teal-600">
+
+          <Link href="/jadwal_dokter" className="flex items-center gap-2 text-gray-700 hover:text-teal-600">
+            <CalendarDays className="w-4 h-4" />
             Jadwal Dokter
           </Link>
-          {/* <Link href="/login" className="text-gray-700 hover:text-teal-600">
+
+          <Link href="/kontak" className="flex items-center gap-2 text-gray-700 hover:text-teal-600">
+            <Phone className="w-4 h-4" />
+            Kontak
+          </Link>
+          <Link href="/login" className="bg-teal-600 text-white px-4 py-2 rounded-xl hover:bg-teal-700">
             Masuk
           </Link>
-          <Link
+          {/* <Link
             href="/register"
             className="bg-teal-600 text-white px-4 py-2 rounded-xl hover:bg-teal-700"
           >

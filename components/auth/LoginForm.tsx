@@ -4,6 +4,7 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { ArrowLeft } from 'lucide-react';
 
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -113,6 +114,12 @@ export default function Login() {
           Belum punya akun?{" "}
           <Link href="/register" className="text-indigo-600 hover:underline">
             Daftar di sini
+          </Link>
+        </p>
+        <p className="text-center text-sm text-gray-500">
+          <Link href="/" className="inline-flex items-center gap-1 text-indigo-600 hover:underline">
+            <ArrowLeft className="w-4 h-4" />
+            Kembali
           </Link>
         </p>
         {otpStatus === "not_verified" && (

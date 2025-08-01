@@ -145,6 +145,25 @@ model RegistrasiRj {
   @@map("registrasi_rjs")
 }
 
+model Kontak {
+  id        String   @id @default(uuid())
+  nama      String
+  email     String
+  pesan   String
+  status_pesan Int       @default(1)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  createdBy String?
+  updatedBy String?
+
+  deletedAt DateTime?
+  deletedBy String?
+  deletedIs Int       @default(2)
+
+  @@map("kontaks")
+}
+
 enum Role {
   ADMIN
   DOKTER
