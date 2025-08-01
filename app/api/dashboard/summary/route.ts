@@ -2,6 +2,7 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { startOfDay, endOfDay } from 'date-fns'
+import { DokterType } from '@prisma/client';
 
 export async function GET() {
   try {
@@ -19,7 +20,8 @@ export async function GET() {
     //     },
     //   },
     // })
-    const jumlahDokter = await prisma.dokter.count();
+    const jumlahDokter = await prisma.dokter.count({where: { dokterTipe:'DOKTER'}});
+    const jumlahPerawat = await prisma.dokter.count({where: { dokterTipe:'PERAWAT'}});
     const jumlahKonsultasiHariIni = await prisma.registrasiRj.count({
       where: {
         tanggal: {
@@ -28,15 +30,15 @@ export async function GET() {
         },
       },
     });
-    const akunTerverifikasi = await prisma.user.count({
-      where: { verified: true },
-    });
+    // const akunTerverifikasi = await prisma.user.count({
+    //   where: { verified: true },
+    // });
 
     return NextResponse.json({
       pasien: jumlahPasien,
       dokter: jumlahDokter,
       konsultasi: jumlahKonsultasiHariIni,
-      verifikasi: akunTerverifikasi,
+      perawat: jumlahPerawat,
     });
   } catch (error) {
     return NextResponse.json({ error: 'Gagal mengambil data' }, { status: 500 });

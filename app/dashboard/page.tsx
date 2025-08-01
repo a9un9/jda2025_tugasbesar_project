@@ -10,7 +10,7 @@ export default function DashboardPage() {
     pasien: 0,
     dokter: 0,
     konsultasi: 0,
-    verifikasi: 0,
+    perawat: 0,
   });
 
   useEffect(() => {
@@ -45,8 +45,8 @@ export default function DashboardPage() {
           <p className="text-xl font-bold">{summary.konsultasi}</p>
         </div>
         <div className="bg-white shadow rounded-lg p-4">
-          <p className="text-sm text-gray-500">Akun Terverifikasi</p>
-          <p className="text-xl font-bold">{summary.verifikasi}</p>
+          <p className="text-sm text-gray-500">Jumlah Perawat</p>
+          <p className="text-xl font-bold">{summary.perawat}</p>
         </div>
       </div>
 
