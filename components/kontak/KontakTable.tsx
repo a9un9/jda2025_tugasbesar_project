@@ -13,6 +13,7 @@ interface Kontak {
   email: string;
   pesan: string;
   createdAt: string;
+  status_pesan: number;
 }
 
 export default function KontakTable() {
@@ -119,6 +120,7 @@ export default function KontakTable() {
               <th className="p-2 border">Nama</th>
               <th className="p-2 border">Email</th>
               <th className="p-2 border">Isi pesan</th>
+              <th className="p-2 border">Status pesan</th>
               <th className="p-2 border">Aksi</th>
             </tr>
           </thead>
@@ -126,7 +128,7 @@ export default function KontakTable() {
             {loading
               ? Array.from({ length: kontaksPerPage }).map((_, i) => (
                   <tr key={i}>
-                    {[...Array(6)].map((_, j) => (
+                    {[...Array(7)].map((_, j) => (
                       <td key={j} className="p-2 border">
                         <div className="h-4 bg-gray-200 rounded animate-pulse w-full"></div>
                       </td>
@@ -150,6 +152,15 @@ export default function KontakTable() {
                     <td className="p-2 border">{u.nama}</td>
                     <td className="p-2 border">{u.email}</td>
                     <td className="p-2 border">{u.pesan}</td>
+                    <td className="p-2 border">
+                      {u.status_pesan === 1 ? (
+                        <span className="text-red-600 font-semibold">Belum dibalas</span>
+                      ) : u.status_pesan === 2 ? (
+                        <span className="text-green-600">Sudah dibalas</span>
+                      ) : (
+                        <span className="text-gray-500">Tidak Diketahui</span>
+                      )}
+                    </td>
                     <td className="p-2 border">
                       <div className="flex justify-center items-center gap-2">
                         <button
