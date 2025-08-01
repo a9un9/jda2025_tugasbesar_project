@@ -18,7 +18,7 @@ export default function Register() {
     name: "",
     email: "",
     password: "",
-    role: "admin",
+    role: "",
     kodeDokter: "",
   });
 
@@ -109,6 +109,7 @@ export default function Register() {
               className="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-teal-400"
               required
             >
+            <option value="">Pilih</option>
               <option value="admin">Admin</option>
               <option value="dokter">Dokter</option>
               <option value="perawat">Perawat</option>
