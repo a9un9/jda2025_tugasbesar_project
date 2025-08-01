@@ -1,19 +1,4 @@
-'use client';
-
-import { useEffect } from 'react';
-
-export default function ErrorPage({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
-  useEffect(() => {
-    // Log error ke monitoring service kalau perlu
-    console.error(error);
-  }, [error]);
-
+export default function JadwalDokterPage() {
   return (
     <main className="flex flex-col items-center justify-center text-center px-4 overflow-hidden">
       <img

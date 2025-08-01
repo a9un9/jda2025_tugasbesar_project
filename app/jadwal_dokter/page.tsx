@@ -1,20 +1,7 @@
-'use client';
 
-import { useEffect } from 'react';
 import Navbar from "@/components/landing/Navbar";
 
-export default function ErrorPage({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
-  useEffect(() => {
-    // Log error ke monitoring service kalau perlu
-    console.error(error);
-  }, [error]);
-
+export default function JadwalDokterPage() {
   return (
     <>
     <Navbar />
