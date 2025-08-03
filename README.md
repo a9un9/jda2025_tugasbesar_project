@@ -1,3 +1,10 @@
+
+LINK MANUAL BOOK SISTEM KLINIK
+https://docs.google.com/document/d/1_t15MBS3MLfbNSg66YRHhIk3CVFEepOn/edit?usp=drive_link&ouid=117899063232455236555&rtpof=true&sd=true
+
+
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
