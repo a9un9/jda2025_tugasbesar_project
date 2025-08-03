@@ -1,6 +1,6 @@
 
 LINK MANUAL BOOK SISTEM KLINIK
-https://docs.google.com/document/d/1GZg1oQXIOjYu3FU_OPBDhHDvMAFfx8ea/edit?usp=drive_link&ouid=117899063232455236555&rtpof=true&sd=true
+https://docs.google.com/document/d/1_t15MBS3MLfbNSg66YRHhIk3CVFEepOn/edit?usp=drive_link&ouid=117899063232455236555&rtpof=true&sd=true
 
 
 
